@@ -1,4 +1,4 @@
-const RatingAndReview = require("../models/RatingandReview")
+const RatingAndReview = require("../models/RatingAndReview")
 const Course = require("../models/Course")
 const mongoose = require("mongoose")
 
@@ -59,7 +59,7 @@ exports.createRating = async (req, res) => {
 
              console.log(updatedCourseDetails); 
              
-             await updatedCourseDetails.save();
+           /*  await updatedCourseDetails.save(); */
                                         
             // Return Response
             return res.status(200).json({
