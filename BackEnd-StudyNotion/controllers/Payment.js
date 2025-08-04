@@ -10,7 +10,7 @@ const CourseProgress = require("../models/CourseProgress");
 
 
 /* --------------------------------------------------------------* {Payment Code For Multiple Courses} *----------------------------------------------------------------*/
-// capture the payment and initiate the Razorpay order
+// capture the payment and initiate the  order
 exports.capturePayment = async(req, res) => {
     
      const {courses} = req.body;
@@ -52,6 +52,9 @@ exports.capturePayment = async(req, res) => {
           currency: "INR",
           receipt: Math.random(Date.now()).toString(),
      }
+
+     console.log("🔍 Order creation options:", options);
+     console.log("🔍 Backend Razorpay Key ID:", process.env.RAZORPAY_KEY);
 
      try {
            const paymentResponse = await instance.orders.create(options);
