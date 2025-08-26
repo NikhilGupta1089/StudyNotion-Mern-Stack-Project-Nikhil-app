@@ -16,10 +16,9 @@ exports.auth = async (req, res, next) => {
 	
 		// Extracting JWT from request cookies, body or header
 		const token =
-			req.cookies.token ||
-			req.body.token ||
-			//(req.header("Authorization") && req.header("Authorization").replace("Bearer ", ""));
-			 (req.header("Authorization")?.replace("Bearer ", ""));
+             (req.cookies && req.cookies.token) ||
+             (req.body && req.body.token) ||
+             (req.header("Authorization")?.replace("Bearer ", ""));
 
 			console.log("Token Received:", token);
 			console.log("JWT_SECRET value:", process.env.JWT_SECRET);

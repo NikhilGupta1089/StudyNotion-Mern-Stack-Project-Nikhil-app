@@ -129,8 +129,8 @@ export function login(email, password, navigate) {
                 dispatch(setUser({...response.data.user, image: userImage}))
                 
                 // Important -> Local Storage (study)
-                localStorage.setItem("token", JSON.stringify(response.data.token))
-                localStorage.setItem("user", JSON.stringify(response.data.user))
+                sessionStorage.setItem("token", JSON.stringify(response.data.token))
+                sessionStorage.setItem("user", JSON.stringify(response.data.user))
                
                 navigate("/dashboard/my-profile")
         }
@@ -226,8 +226,8 @@ export function logout(navigate) {
          dispatch(setUser(null))
          dispatch(resetCart())
 
-         localStorage.removeItem("token")
-         localStorage.removeItem("user")
+         sessionStorage.removeItem("token")
+         sessionStorage.removeItem("user")
          
          toast.success("Logged Out")
          navigate("/")
