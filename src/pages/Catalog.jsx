@@ -14,7 +14,7 @@ import Error from "./Error"
 
 const Catalog = () => {
 
-    const { loading } = useSelector((state) => state.profile)
+    const [loading, setLoading] = useState(false) 
     const [active, setActive] = useState(1)
     const {catalogName} = useParams();
     const [catalogPageData, setCatalogPageData] = useState(null);
@@ -23,6 +23,7 @@ const Catalog = () => {
     // Fetch all categories
     useEffect(() => { 
         const getCategories = async() => {
+         
         try{  
             const res = await apiConnector("GET", categories.CATEGORIES_API);
             const category_id = res?.data?.data?.filter((ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName.toLowerCase())[0]._id;
@@ -38,11 +39,14 @@ const Catalog = () => {
      if(categoryId){
         const getCategoryDetails = async() => {
             try {
+               setLoading(true)
                  const res = await getCatalogPageData(categoryId);
                  console.log("Catalog Response:", res)
                  setCatalogPageData(res);
+                 setLoading(false)
             }
             catch(error){
+              setLoading(false)
                 console.log(error)
             }
         }
@@ -112,13 +116,6 @@ const Catalog = () => {
                 </div>
             </div>
 
-            {/* Section 2 */}
-            <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
-                    <p className="section_heading">Top Courses in {catalogPageData?.data?.selectedCategory?.name}</p>
-                <div className="py-8">
-                    <CourseSlider Courses={catalogPageData?.data?.differentCategory?.courses}/>
-                </div>
-            </div>
 
             {/* Section 3 */}
             <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">

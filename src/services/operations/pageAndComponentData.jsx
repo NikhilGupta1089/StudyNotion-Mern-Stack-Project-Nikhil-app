@@ -4,7 +4,7 @@ import {toast} from "react-hot-toast"
 import { catalogData } from '../apis';
 
 export const getCatalogPageData = async (categoryId) => {
-  const toastId = toast.loading("Loading...");
+  
   let result = [];
 
   try {
@@ -24,9 +24,10 @@ export const getCatalogPageData = async (categoryId) => {
     if (!response?.data?.success) {
       throw new Error(response?.data?.message || "Could not fetch category page data");
     }
-
+   
     result = response?.data;
   } catch (error) {
+    
     console.log("❌ CATALOG PAGE DATA API ERROR:", error);
     toast.error(error?.response?.data?.message || error.message || "Something went wrong");
     result = {
@@ -34,8 +35,6 @@ export const getCatalogPageData = async (categoryId) => {
       message: error?.response?.data?.message || "Catalog API failed",
     };
   }
-
-  toast.dismiss(toastId);
   return result;
 };
 

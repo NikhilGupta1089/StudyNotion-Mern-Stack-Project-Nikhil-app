@@ -10,6 +10,10 @@ import { apiConnector } from "../../services/apiconnector"
 import { categories } from "../../services/apis"
 import { ACCOUNT_TYPE } from "../../utils/constants"
 import ProfileDropdown from "../core/Auth/ProfileDropDown"
+import { CgLogIn } from "react-icons/cg";
+import { FaUserPlus } from "react-icons/fa6";
+import { PiUsersThreeFill } from "react-icons/pi";
+import { MdContacts } from "react-icons/md";
 
 // const subLinks = [
 //   {
@@ -38,6 +42,7 @@ function Navbar() {
 
   const [subLinks, setSubLinks] = useState([])
   const [loading, setLoading] = useState(false)
+  const [drop, setDrop] =  useState(false)
 
   useEffect(() => {
     ;(async () => {
@@ -69,7 +74,7 @@ function Navbar() {
       <div className="flex w-11/12 max-w-maxContent items-center justify-between">
         {/* Logo */}
         <Link to="/">
-          <img src={logo} alt="Logo" width={160} height={32} loading="lazy" />
+          <img src={logo} alt="Logo"  loading="lazy" className="w-[110px] h-[23px] md:w-[160px] md:h-[32px]" />
         </Link>
         {/* Navigation links */}
         <nav className="hidden md:block">
@@ -130,8 +135,47 @@ function Navbar() {
             ))}
           </ul>
         </nav>
+ 
+        <nav className="block md:hidden">
+                <div
+                      className={`group relative flex cursor-pointer items-center gap-1 text-[20px] ${
+                        matchRoute("/catalog/:catalogName")
+                          ? "text-yellow-25"
+                          : "text-richblack-25"
+                      }`}
+                    >
+                      <p>Catalog</p>
+                      <BsChevronDown />
+                      <div className="invisible absolute left-[50%] top-[50%] z-[1000] flex w-[200px] translate-x-[-50%] translate-y-[3em] flex-col rounded-lg
+                        bg-richblack-5 p-4 text-richblack-900 opacity-0 transition-all duration-150 group-hover:visible group-hover:translate-y-[1.65em] group-hover:opacity-100 lg:w-[300px]">
+                        <div className="absolute left-[50%] top-0 -z-10 h-6 w-6 translate-x-[80%] translate-y-[-40%] rotate-45 select-none rounded bg-richblack-5"></div>
+                        {loading ? (
+                          <p className="text-center">Loading...</p>
+                        ) : subLinks.length ? (
+                          <>
+                            {subLinks
+                              ?.map((subLink, i) => (
+                                <Link
+                                  to={`/catalog/${subLink.name
+                                    .split(" ")
+                                    .join("-")
+                                    .toLowerCase()}`}
+                                  className="rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-50"
+                                  key={i}
+                                >
+                                  <p>{subLink.name}</p>
+                                </Link>
+                              ))}
+                          </>
+                        ) : (
+                          <p className="text-center">No Courses Found</p>
+                        )}
+                      </div>
+                    </div>
+        </nav>
+    
         {/* Login / Signup / Dashboard */}
-        <div className="hidden items-center gap-x-4 md:flex">
+        <div className="items-center gap-x-4 flex">
           {user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
             <Link to="/dashboard/cart" className="relative">
               <AiOutlineShoppingCart className="text-2xl text-richblack-100" />
@@ -144,14 +188,14 @@ function Navbar() {
           )}
           {token === null && (
             <Link to="/login">
-              <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
+              <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 hidden md:block">
                 Log in
               </button>
             </Link>
           )}
           {token === null && (
             <Link to="/signup">
-              <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
+              <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 hidden md:block">
                 Sign up
               </button>
             </Link>
@@ -159,10 +203,54 @@ function Navbar() {
           {token !== null && <ProfileDropdown />}
         </div>
         {/* Pending */}
+        { token === null && (
         <button className="mr-4 md:hidden">
-          <AiOutlineMenu fontSize={24} fill="#AFB2BF" />
+          <AiOutlineMenu fontSize={24} fill="#AFB2BF" 
+            onClick={() => setDrop(prev => !prev)}
+          />
         </button>
+       ) } 
       </div>
+        {
+          (!user && drop) && (
+             <div className="w-[170px] h-[210px] bg-richblack-700 rounded-md z-[100] absolute top-[6%] right-[3%] box-border">
+                <div className="text-white flex flex-col items-start justify-center w-full mt-[5px]">
+                 {token === null && (
+                   <Link to="/login"
+                      className="flex gap-[13px] border-b border-b-richblack-100 px-[10px] py-[8px] text-richblack-5 mb-[5px] w-full text-[19px] items-center "
+                      onClick={() => setDrop(false)}>
+                      <CgLogIn />           
+                       Log in           
+                  </Link>
+                 ) } 
+                 {token === null && (
+                 <Link to="/signup"
+                    className="flex gap-[13px] border-b border-b-richblack-100 px-[10px] py-[8px] text-richblack-5 mb-[5px] w-full text-[19px] items-center "
+                    onClick={() => setDrop(false)}>
+                      <FaUserPlus />         
+                       Sign up 
+                </Link>
+                )}
+                {token === null && (
+                 <Link to="/about"
+                    className="flex gap-[13px] border-b border-b-richblack-100 px-[10px] py-[8px] text-richblack-5 mb-[5px] w-full text-[19px] items-center "
+                    onClick={() => setDrop(false)}>
+                      <PiUsersThreeFill />        
+                       About Us
+                </Link>
+                )}
+                {token === null && (
+                 <Link to="/contact"
+                    className="flex gap-[13px] px-[10px] py-[8px] text-richblack-5 mb-[5px] w-full text-[19px] items-center "
+                    onClick={() => setDrop(false)}>
+                      <MdContacts />        
+                       Contact Us
+                </Link>
+                )}
+                </div>
+             </div>
+           )
+        }
     </div>
   )
 }

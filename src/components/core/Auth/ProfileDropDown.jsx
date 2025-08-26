@@ -3,6 +3,8 @@ import { AiOutlineCaretDown } from "react-icons/ai"
 import { VscDashboard, VscSignOut } from "react-icons/vsc"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
+import { PiUsersThreeFill } from "react-icons/pi";
+import { MdContacts } from "react-icons/md";
 
 import useOnClickOutside from "../../../hooks/useOnClickOutside"
 import { logout } from "../../../services/operations/authAPI"
@@ -53,6 +55,23 @@ const ProfileDropDown = () => {
                         <VscSignOut className="text-lg"/>
                         Logout
                      </div>
+                    <Link to="/about"                      
+                         onClick={() => setOpen(false)}>
+                        <div className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-100 hover:bg-richblack-700 hover:text-richblack-25">
+                            <PiUsersThreeFill  className="text-lg"/>        
+                             About Us
+                         </div>                      
+                    </Link>
+                                     
+                                     
+                     <Link to="/contact"                   
+                        onClick={() => setOpen(false)}>
+                        <div className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-100 hover:bg-richblack-700 hover:text-richblack-25">
+                           <MdContacts />        
+                            Contact Us
+                         </div>         
+                    </Link>
+                                     
                  </div>
                )
             }

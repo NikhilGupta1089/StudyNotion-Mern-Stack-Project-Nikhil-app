@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom"
 import { addToCart } from "../../../slices/cartSlice"
 import { ACCOUNT_TYPE } from "../../../utils/constants"
 
-const CourseDetailsCard = ({course, setConfirmationModal, handleBuyCourse}) => {
+const CourseDetailsCard = ({course, setConfirmationModal, handleBuyCourse,}) => {
 
    const {cart} = useSelector((state) => state.cart)
     const {user} = useSelector((state) => state.profile);

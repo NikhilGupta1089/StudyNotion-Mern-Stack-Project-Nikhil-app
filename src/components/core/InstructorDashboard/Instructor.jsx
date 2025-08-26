@@ -53,7 +53,7 @@ const Instructor = () => {
             loading ? (<div className='spinner'></div>)
            : courses.length > 0 ?
            (<div>
-             <div className="my-4 flex h-[450px] space-x-4">
+             <div className="my-4 flex flex-col lg:flex-row h-auto lg:h-[540px] lg:space-x-4 space-y-6">
                {/* Render chart / graph */}
                {
                   totalAmount > 0 || totalStudents > 0 ? (
@@ -104,14 +104,14 @@ const Instructor = () => {
                       <p className="text-xs font-semibold text-yellow-50">View all</p>
                   </Link>
                </div>
-               <div className="my-4 flex items-start space-x-6">
+               <div className="my-4 flex flex-col md:flex-row items-start md:space-x-6 space-y-10">
                   {
                      courses.slice(0,3).map((course)=> (
-                        <div key={course._id} className="w-1/3">
+                        <div key={course._id} className="w-full md:w-1/3">
                              <img
                                 src={course.thumbnail}
                                 alt="thumbnail"
-                                className="h-[201px] w-full rounded-md object-fill"
+                                className="h-[220px] w-full rounded-md object-fill"
                              />
                              <div className="mt-3 w-full">
                                 <p className="text-sm font-medium text-richblack-50">

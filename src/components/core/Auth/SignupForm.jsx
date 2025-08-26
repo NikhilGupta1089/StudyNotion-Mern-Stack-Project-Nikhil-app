@@ -106,7 +106,7 @@ function SignupForm() {
                             style={{
                                 boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
                             }}
-                            className="w-full rounded-[0.5rem] bg-richblue-800 text-richblack-5"
+                            className="w-full rounded-[0.5rem] bg-richblue-800 p-[12px] text-richblack-5"
                         />
                     </lable>
                     <lable>

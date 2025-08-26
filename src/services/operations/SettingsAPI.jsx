@@ -31,15 +31,17 @@ export function updateDisplayPicture(token, formData) {
                  throw new Error(response.data.message)
               }
 
+              toast.dismiss(toastId)
               toast.success("Display Picture Updated Successfully")
               dispatch(setUser(response.data.data))
         }
         catch(error) {
+             toast.dismiss(toastId)
              console.log("UPDATE_DISPLAY_PICTURE_API API ERROR............", error)
              toast.error("Could Not Update Display Picture")
         }
 
-        toast.dismiss(toastId)
+       
     }
 }
 
@@ -56,6 +58,7 @@ export function updateProfile(token, formData) {
       if (!response.data.success) {
         throw new Error(response.data.message)
       }
+      toast.dismiss(toastId)
       const userImage = response.data.updatedUserDetails.image
         ? response.data.updatedUserDetails.image
         : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.updatedUserDetails.firstName} ${response.data.updatedUserDetails.lastName}`
@@ -64,10 +67,11 @@ export function updateProfile(token, formData) {
       )
       toast.success("Profile Updated Successfully")
     } catch (error) {
+      toast.dismiss(toastId)
       console.log("UPDATE_PROFILE_API API ERROR............", error)
       toast.error("Could Not Update Profile")
     }
-    toast.dismiss(toastId)
+    
   }
 }
 
@@ -83,12 +87,14 @@ export async function changePassword(token, formData) {
     if (!response.data.success) {
       throw new Error(response.data.message)
     }
+    toast.dismiss(toastId)
     toast.success("Password Changed Successfully")
   } catch (error) {
+     toast.dismiss(toastId)
     console.log("CHANGE_PASSWORD_API API ERROR............", error)
     toast.error(error.response.data.message)
   }
-  toast.dismiss(toastId)
+ 
 }
 
 export function deleteProfile(token, navigate) {
@@ -103,12 +109,14 @@ export function deleteProfile(token, navigate) {
       if (!response.data.success) {
         throw new Error(response.data.message)
       }
+      toast.dismiss(toastId)
       toast.success("Profile Deleted Successfully")
       dispatch(logout(navigate))
     } catch (error) {
+      toast.dismiss(toastId)
       console.log("DELETE_PROFILE_API API ERROR............", error)
       toast.error("Could Not Delete Profile")
     }
-    toast.dismiss(toastId)
+  
   }
 }

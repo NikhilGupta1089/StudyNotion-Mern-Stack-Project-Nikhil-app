@@ -17,7 +17,7 @@ const ConfirmationModal = ({modalData}) => {
                     text={modalData?.btn1Text}
                 />
                 <button 
-                 className='coursor-pointer rounded-md bg-richblack-200 py-[20px] px-[20px] font-semibold text-richblue-900'
+                 className='coursor-pointer rounded-md bg-richblack-200 py-[10px] px-[12px] font-semibold text-richblue-900'
                 onClick={modalData?.btn2Handler}>
                     {modalData?.btn2Text}
                 </button>

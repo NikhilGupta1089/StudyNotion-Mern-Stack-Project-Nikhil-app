@@ -19,7 +19,7 @@ export function sendOtp(email, navigate) {
 
     return async(dispatch) => {
         const toastId = toast.loading("Loading...")
-        dispatch(setLoading(true))
+      //  dispatch(setLoading(true))
         console.log("SENDOTP_API: ",SENDOTP_API);
 
         try {
@@ -35,16 +35,18 @@ export function sendOtp(email, navigate) {
                 throw new Error(response.data.message)
             }
 
+            toast.dismiss(toastId)
             toast.success("OTP Sent Successfully")
             navigate("/verify-email")
         }
         catch(error) {
+             toast.dismiss(toastId)
             console.log("SEND API ERROR.........", error)
             toast.error("Could Not Send OTP")
         }
 
-        dispatch(setLoading(false))
-        toast.dismiss(toastId)
+      //  dispatch(setLoading(false))
+       
     }
 }
 
@@ -61,7 +63,6 @@ export function signUp(
 ) {
     return async (dispatch) => {
         const toastId = toast.loading("Loading...")
-        dispatch(setLoading(true))
         console.log("SIGNUP_API: ",SIGNUP_API )
         
         try {
@@ -80,18 +81,17 @@ export function signUp(
             if (!response.data.success) {
                 throw new Error(response.data.message)
             }
-
+            toast.dismiss(toastId)
             toast.success("Signup Successful")
             navigate("/login")
         }
         catch(error) {
+             toast.dismiss(toastId)
             console.log("SIGNUP API ERROR..........", error)
             toast.error("Signup Failed")
             navigate("/signup")
         }
 
-        dispatch(setLoading(false))
-        toast.dismiss(toastId)
 
     }
 }
@@ -102,7 +102,7 @@ export function login(email, password, navigate) {
      
      return async (dispatch) => {
         const toastId = toast.loading("Loading...")
-        dispatch(setLoading(true))
+      //  dispatch(setLoading(true))
         console.log("LOGIN_API: ", LOGIN_API)
 
         try {
@@ -117,7 +117,8 @@ export function login(email, password, navigate) {
                if(!response.data.success) {
                  throw new Error(response.data.message)
                }
-
+                
+              toast.dismiss(toastId)
                toast.success("Login Successful")
                dispatch(setToken(response.data.token))
 
@@ -134,12 +135,13 @@ export function login(email, password, navigate) {
                 navigate("/dashboard/my-profile")
         }
         catch(error) {
+             toast.dismiss(toastId)
             console.log("LOGIN API ERROR............", error)
             toast.error("Login Failed")
         }
 
-        dispatch(setLoading(false))
-        toast.dismiss(toastId)
+      //  dispatch(setLoading(false))
+      
      }
 }
 
@@ -148,7 +150,7 @@ export function getPasswordResetToken(email, setEmailSent) {
 
     return async (dispatch) => {
         const toastId = toast.loading("Loading...")
-        dispatch(setLoading(true))
+      //  dispatch(setLoading(true))
         console.log("RESETPASSTOKEN_API: ", RESETPASSTOKEN_API)
 
         try {
@@ -162,16 +164,18 @@ export function getPasswordResetToken(email, setEmailSent) {
                    throw new Error(response.data.message)
                }
 
+               toast.dismiss(toastId)
                toast.success("Reset Email Sent")
                setEmailSent(true)
         }
         catch(error) {
+             toast.dismiss(toastId)
              console.log("RESETPASSTOKEN ERROR............", error)
              toast.error("Failed To Send Reset Email")
         }
 
-        toast.dismiss(toastId)
-        dispatch(setLoading(false))
+     
+     //   dispatch(setLoading(false))
     }
 }
 
@@ -181,7 +185,7 @@ export function resetPassword(password, confirmPassword, token, navigate) {
 
       return async (dispatch) => {
           const toastId = toast.loading("Loading...")
-          dispatch(setLoading(true))
+       //   dispatch(setLoading(true))
           console.log("RESETPASSWORD_API: ",RESETPASSWORD_API)
 
           try {
@@ -197,16 +201,18 @@ export function resetPassword(password, confirmPassword, token, navigate) {
                    throw new Error(response.data.message)
               }
 
+               toast.dismiss(toastId)
                toast.success("Password Reset Successfully")
                navigate("/login")  
             }
             catch(error) {
+                 toast.dismiss(toastId)
                  console.log("RESETPASSWORD ERROR............", error)
                  toast.error("Failed To Reset Password")
             }
 
-            toast.dismiss(toastId)
-            dispatch(setLoading(false))
+       
+          //  dispatch(setLoading(false))
         }
 }
 
@@ -229,4 +235,3 @@ export function logout(navigate) {
      }
 }
 
-// getPasswordResetToken
