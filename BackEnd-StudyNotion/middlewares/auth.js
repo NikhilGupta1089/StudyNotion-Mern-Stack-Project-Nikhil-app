@@ -8,8 +8,12 @@ dotenv.config();
 
 // This function is used as middleware to authenticate user requests
 exports.auth = async (req, res, next) => {
-	  console.log("📸 updateDisplayPicture route hit");
+	   console.log("🔐 Auth middleware started");
+	 console.log("Headers:", req.headers);
+
+		
 	try {
+	
 		// Extracting JWT from request cookies, body or header
 		const token =
 			req.cookies.token ||
@@ -18,13 +22,17 @@ exports.auth = async (req, res, next) => {
 			 (req.header("Authorization")?.replace("Bearer ", ""));
 
 			console.log("Token Received:", token);
+			console.log("JWT_SECRET value:", process.env.JWT_SECRET);
 
+		console.log("JWT_SECRET value:", process.env.JWT_SECRET);	
 		// If JWT is missing, return 401 Unauthorized response
 		if (!token) {
 			return res.status(401).json({ success: false, message: `Token Missing` });
 		}
 
+
 		try {
+			console.log("JWT_SECRET value:", process.env.JWT_SECRET);
 			// Verifying the JWT using the secret key stored in environment variables
 			const decode = await jwt.verify(token, process.env.JWT_SECRET);
 			console.log(decode);
