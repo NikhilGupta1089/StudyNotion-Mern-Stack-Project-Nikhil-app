@@ -19,10 +19,10 @@ const Instructor = () => {
         const getCourseDataWithStats = async() => {
             setLoading(true);
             const instructorApiData = await getInstructorData(token);
-            console.log("InstructorApi Data:", instructorApiData)
+          
             const result = await fetchInstructorCourses(token);
 
-            console.log("Result:", result);
+           
 
             if(instructorApiData.length){
                 setInstructorData(instructorApiData);

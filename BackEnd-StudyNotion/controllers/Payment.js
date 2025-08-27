@@ -53,12 +53,12 @@ exports.capturePayment = async(req, res) => {
           receipt: Math.random(Date.now()).toString(),
      }
 
-     console.log("🔍 Order creation options:", options);
-     console.log("🔍 Backend Razorpay Key ID:", process.env.RAZORPAY_KEY);
+    // console.log("🔍 Order creation options:", options);
+   
 
      try {
            const paymentResponse = await instance.orders.create(options);
-           console.log("payMent Response: ", paymentResponse)
+           //console.log("payMent Response: ", paymentResponse)
            res.json({
             success:true,
             data:paymentResponse,
@@ -183,7 +183,7 @@ exports.sendPaymentSuccessEmail = async (req, res) => {
          `Successfully Enrolled into ${enrolledCourse.courseName}`,
          courseEnrollmentEmail(enrolledCourse.courseName, `${enrolledStudent.firstName}`)
        )
-        console.log("Email Sent Successfully", emailResponse.response);
+       // console.log("Email Sent Successfully", emailResponse.response);
 
     }
     catch(error){

@@ -57,7 +57,7 @@ exports.createRating = async (req, res) => {
                                         },
                                         {new: true});
 
-             console.log(updatedCourseDetails); 
+          
              
            /*  await updatedCourseDetails.save(); */
                                         

@@ -48,7 +48,7 @@ const CourseBuilderForm = () => {
                 courseId: course._id,
             }, token )
 
-            console.log("result", result);
+           // console.log("result", result);
              
         }
 

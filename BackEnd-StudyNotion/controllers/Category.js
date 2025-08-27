@@ -24,7 +24,7 @@ exports.createCategory = async (req, res) => {
             name:name,
             description:description,
           });
-          console.log("CategorysDetails: ", CategorysDetails);
+         // console.log("CategorysDetails: ", CategorysDetails);
 
           // return response
           return res.status(200).json({
@@ -66,11 +66,11 @@ exports.showAllCategories = async (req, res) => {
 // categoryPageDetails ka handler function
 
 exports.categoryPageDetails = async (req ,res) => {
-   console.log("Incoming request body:", req.body); // ✅ should show { categoryId: '...' }
+  /* console.log("Incoming request body:", req.body); // ✅ should show { categoryId: '...' } */
     try {
          const {categoryId} = req.body;
          
-          console.log("selectedCategory", categoryId);
+        //  console.log("selectedCategory", categoryId);
          // Get courses for the speified category
          // selectedCategory contain courseId so by using "populate", selectedCategory conatins courses related to courseId
           const selectedCategory = await Category.findById(categoryId)
@@ -80,7 +80,7 @@ exports.categoryPageDetails = async (req ,res) => {
                populate: "ratingAndReviews",
              })
             .exec()
-         console.log("SELECTED COURSE", selectedCategory)
+       //  console.log("SELECTED COURSE", selectedCategory)
 
          // Handle the case when the category is not found
          if(!selectedCategory){
@@ -126,9 +126,10 @@ exports.categoryPageDetails = async (req ,res) => {
 
          //find all Courses by using flatMap function
          const allCourses = allCategories.flatMap((category) => category.courses);
+         const allCategoriesCourses = allCategories.flatMap((category) => category.courses); // Repeat this bcz i don't want to sort this
          
          //
-         const mostSellingCourses = allCourses.sort((a ,b) => b.sold - a.sold).slice(0,10);
+         const mostSellingCourses = allCourses.sort((a ,b) => b.studentsEnrolled.length - a.studentsEnrolled.length);
 
          // Return Response
          res.status(200).json({
@@ -138,6 +139,7 @@ exports.categoryPageDetails = async (req ,res) => {
             selectedCategory,
             differentCategory,
             mostSellingCourses,
+            allCategoriesCourses,
             }, 
          })
     }

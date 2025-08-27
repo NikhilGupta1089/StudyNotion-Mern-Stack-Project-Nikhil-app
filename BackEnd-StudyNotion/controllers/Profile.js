@@ -88,7 +88,7 @@ exports.deleteAccount = async (req , res) => {
 		// });
 		// console.log(job);
         //get id
-        console.log("printing id:", req.user.id)
+       // console.log("printing id:", req.user.id)
         const id = req.user.id;
         //validation
         const userDetails = await User.findById(id);
@@ -142,7 +142,7 @@ exports.getAllUserDetails = async (req,res) => {
 
         // validation and get user details
         const userDetails = await User.findById(id).populate("additionalDetails").exec();
-        console.log("UserDetails:", userDetails)
+       
 
         // return response
         return res.status(200).json({
@@ -163,7 +163,7 @@ exports.getAllUserDetails = async (req,res) => {
 /* UPDATE Display Picture */
 
 exports.updateDisplayPicture = async (req,res) => {
-    console.log("📸 updateDisplayPicture route hit");
+ 
     try {
 
         // fetch input{new} display picture
@@ -179,7 +179,7 @@ exports.updateDisplayPicture = async (req,res) => {
             1000,
             1000
         )
-        console.log(image.secure_url);
+      //  console.log(image.secure_url);
 
         // Update the old image by new image
         const updatedProfile = await User.findByIdAndUpdate(

@@ -14,11 +14,11 @@ const EnrolledCourses = () => {
     const getEnrolledCourses = async () => {
         try {
              const response = await getUserEnrolledCourses(token);   // Getting all the published and the drafted courses
-            console.log("response:", response);
+           
 
              // Filtering the published course out
              const filterPublishCourse = response.filter((ele) => ele.status !== "Draft")
-             console.log("Viewing all the couse that is Published", filterPublishCourse);
+           //  console.log("Viewing all the couse that is Published", filterPublishCourse);
              
              setEnrolledCourses(filterPublishCourse);
         }

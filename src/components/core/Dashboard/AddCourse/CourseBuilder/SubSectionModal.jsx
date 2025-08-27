@@ -24,7 +24,7 @@ const SubSectionModal = ({
     register, handleSubmit, setValue, getValues, formState: {errors},
    } = useForm();
 
-   console.log("view:", view , "edit:", edit, "add:", add);
+ //  console.log("view:", view , "edit:", edit, "add:", add);
 
    const dispatch = useDispatch();
    const [loading, setLoading] = useState(false);
@@ -33,7 +33,7 @@ const SubSectionModal = ({
 
    useEffect(() => {
       if(view || edit){
-        console.log("modalData", modalData)
+       // console.log("modalData", modalData)
 
         setValue("lectureTitle", modalData.title);
         setValue("lectureDesc", modalData.description);
@@ -43,7 +43,7 @@ const SubSectionModal = ({
 
    const isFormUpdated = () => {
     const currentValues = getValues();
-    console.log("changes after editing form values:", currentValues)
+    //console.log("changes after editing form values:", currentValues)
     
     if(currentValues.lectureTitle !== modalData.title ||
       currentValues.lectureDesc !== modalData.description ||
@@ -109,8 +109,8 @@ const SubSectionModal = ({
 
     const formData = new FormData();
 
-    console.log("ModalData:", modalData);
-    console.log("data", data);
+   // console.log("ModalData:", modalData);
+   // console.log("data", data);
 
     formData.append("sectionId", modalData);
     formData.append("title", data.lectureTitle);
@@ -120,11 +120,11 @@ const SubSectionModal = ({
     setLoading(true);
     //API call
     const result = await createSubSection(formData, token);
-    console.log("result", result)
+    //console.log("result", result)
 
     if(result){
          // update the structure of course
-      console.log("modalDataSectionId", modalData)
+      //console.log("modalDataSectionId", modalData)
       const updatedCourseContent = course.courseContent.map((section) =>
              section._id === modalData ? result : section);
 

@@ -42,14 +42,13 @@ export default function ChangeProfilePicture(){
 
     const handleFileUpload = () => {
         try {
-             console.log("uploading...")
+           
              setLoading(true)
              const formData = new FormData()
              formData.append("displayPicture", imageFile)
-             console.log("📤 Uploading Image...");
-         console.log("📤 Token:", token);
-        console.log("📤 FormData File:", imageFile);
-        console.log("📤 API Endpoint:", settingsEndpoints.UPDATE_DISPLAY_PICTURE_API);
+         
+      //  console.log("📤 FormData File:", imageFile);
+       // console.log("📤 API Endpoint:", settingsEndpoints.UPDATE_DISPLAY_PICTURE_API);
              
              dispatch(updateDisplayPicture(token , formData)).then(() => {
                 setLoading(false)

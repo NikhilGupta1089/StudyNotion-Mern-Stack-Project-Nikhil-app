@@ -33,8 +33,8 @@ const { convertSecondsToDuration } = require("../utils/secToDuration")
            const tag = JSON.parse(_tag)
            const instructions = JSON.parse(_instructions)
 
-           console.log("tag", tag)
-           console.log("instructions", instructions)
+          // console.log("tag", tag)
+          // console.log("instructions", instructions)
 
           // validation
           if(!courseName || !courseDescription || !whatYouWillLearn || !price || !thumbnail || !tag.length || !category || !instructions.length) {
@@ -52,7 +52,7 @@ const { convertSecondsToDuration } = require("../utils/secToDuration")
           const instructorDetails = await User.findById(userId, {
              accountType: "Instructor",
           });
-          console.log("Instructor Details: ", instructorDetails);
+          //console.log("Instructor Details: ", instructorDetails);
 
           if(!instructorDetails) {
             return res.status(404).json({
@@ -112,7 +112,7 @@ const { convertSecondsToDuration } = require("../utils/secToDuration")
 			     { new: true }
 		     );
 
-          console.log("HEREEEEEEEE", categoryDetails2)
+         // console.log("HEREEEEEEEE", categoryDetails2)
           // Return the new course and a success message
           return res.status(200).json({
             success:true,
@@ -133,8 +133,7 @@ const { convertSecondsToDuration } = require("../utils/secToDuration")
 
  // EditCourse Details handler function
  exports.editCourse = async(req, res) => {
-  console.log("EDIT REQ BODY:", req.body);
-   console.log("EDIT REQ FILES:", req.files);
+
   try {
           const {courseId} = req.body;
           const updates = req.body;
@@ -476,7 +475,7 @@ exports.getFullCourseDetails = async (req, res) => {
       userId: userId,
     })
 
-    console.log("courseProgressCount : ", courseProgressCount)
+   // console.log("courseProgressCount : ", courseProgressCount)
 
     if (!courseDetails) {
       return res.status(400).json({

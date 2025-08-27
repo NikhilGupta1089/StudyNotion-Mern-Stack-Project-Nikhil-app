@@ -41,7 +41,7 @@ const Catalog = () => {
             try {
                setLoading(true)
                  const res = await getCatalogPageData(categoryId);
-                 console.log("Catalog Response:", res)
+                 //console.log("Catalog Response:", res)
                  setCatalogPageData(res);
                  setLoading(false)
             }
@@ -100,30 +100,36 @@ const Catalog = () => {
                       : "text-richblack-50"} cursor-pointer`}
                       onClick={() => setActive(2)}
                       >
-                         New
+                         All Courses
                     </p>
                 </div>
-                <div>
-                  <CourseSlider Courses={catalogPageData?.data?.selectedCategory?.courses}/>
-                </div>
+             
             </div>
-
+            
+          { active === 1 && (  
+           <div>
              {/* Section 2 */}
             <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
-                    <p className="section_heading">Selected Category Courses</p>
+                    <p className="section_heading">Top Courses in {catalogPageData?.data?.selectedCategory?.name}</p>
                 <div className="py-8">
-                    <Course_Card course={catalogPageData?.data?.selectedCategory?.courses[0]} Height={"h-[300px]"}/>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                  { 
+                    catalogPageData?.data?.selectedCategory?.courses?.map((course,index) => (
+                      <Course_Card key={index} course={course} Height={"h-[300px]"} width={"w-full"}/>
+                    ))
+                 }
+                   </div> 
                 </div>
             </div>
 
 
             {/* Section 3 */}
             <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
-                <p className="section_heading">Frequently Bought </p>
+                <p className="section_heading">Frequently Bought Courses</p>
                 <div className="py-8">
                      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         {
-                            catalogPageData?.data?.mostSellingCourses?.slice(0,6)
+                            catalogPageData?.data?.mostSellingCourses?.slice(0,5)
                             .map((course, index) => (
                                   <Course_Card course={course} key={index} Height={"h-[300px]"} width={"w-full"}/>
                             ))
@@ -131,6 +137,26 @@ const Catalog = () => {
                      </div>
                 </div>
             </div>
+         </div> 
+         )}
+            
+          { active === 2 && (  
+            <div>
+               {/* Section 3 */}
+            <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+                <p className="section_heading">All Courses </p>
+                <div className="py-8">
+                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        {
+                            catalogPageData?.data?.allCategoriesCourses?.map((course, index) => (
+                                  <Course_Card course={course} key={index} Height={"h-[300px]"} width={"w-full"}/>
+                            ))
+                        }
+                     </div>
+                </div>
+            </div>
+           </div> 
+          )}   
 
         </div>
 

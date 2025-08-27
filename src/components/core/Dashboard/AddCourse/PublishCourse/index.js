@@ -51,16 +51,16 @@ const PublishCourse = () => {
         }
 
        // const courseStatus = getValues("public") ? COURSE_STATUS.PUBLISHED : COURSE_STATUS.DRAFT;
-         console.log("Course", course)
+        // console.log("Course", course)
         // If form is updated
         const formData = new FormData();
          formData.append("courseId", course._id);       
         formData.append("status", status);  
 
         setLoading(true);
-        console.log("Sending to API:", formData);
+        //console.log("Sending to API:", formData);
         const result = await editCourseDetails(formData, token);
-         console.log("EditResult", result)
+        // console.log("EditResult", result)
 
         if(result) {
            goToCourses();
@@ -70,7 +70,7 @@ const PublishCourse = () => {
 
 
     const onSubmit = (data) => {
-        console.log("data", data)
+        //console.log("data", data)
         handleCoursePublish();
     }
 

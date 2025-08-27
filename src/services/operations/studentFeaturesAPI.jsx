@@ -51,9 +51,9 @@ export async function buyCourse(token, courses, userDetails, navigate, dispatch)
             throw new Error(orderResponse.data.message);
           }
           toast.dismiss(toastId)
-          console.log("OrderResponse:", orderResponse.data.data)
+          //console.log("OrderResponse:", orderResponse.data.data)
 
-          console.log("Razorpay Key:", process.env.REACT_APP_RAZORPAY_KEY); // <-- ADD THIS HERE
+          //console.log("Razorpay Key:", process.env.REACT_APP_RAZORPAY_KEY); // <-- ADD THIS HERE
           //Create Options
           const options = {
               key: process.env.REACT_APP_RAZORPAY_KEY,

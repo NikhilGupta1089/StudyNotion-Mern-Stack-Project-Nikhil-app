@@ -226,13 +226,12 @@ exports.sendOTP = async (req , res) => {
         lowerCaseAlphabets:false,
         specialChars:false,
       });
-      console.log("OTP generated: ", otp);
+     // console.log("OTP generated: ", otp);
 
       // check unique otp or not
       let result = await OTP.findOne({otp: otp});
-      console.log("Result is Generate OTP Func");
-		  console.log("OTP", otp);
-		  console.log("Result", result);
+     
+		 // console.log("Result", result);
 
       while(result){
         otp = otpGenerator.generate(6, {
@@ -246,7 +245,7 @@ exports.sendOTP = async (req , res) => {
 
       // create an entry for OTP
       const otpBody = await OTP.create(otpPayload);
-      console.log("otpBody: ", otpBody);
+ 
 
         // Send OTP email
       try {
@@ -255,7 +254,7 @@ exports.sendOTP = async (req , res) => {
               "Verification Email from StudyNotion",
               emailTemplate(otp) // make sure your emailTemplate function returns HTML string
           );
-          console.log("OTP Email sent successfully:", mailResponse.response);
+        //  console.log("OTP Email sent successfully:", mailResponse.response);
       } catch(error) {
           console.error("Failed to send OTP email:", error);
       }
@@ -327,7 +326,7 @@ exports.changePassword = async(req, res) => {
                     `Password updated Successfully for ${updatedUserDetails.firstName} ${updatedUserDetails.lastName}`
                   )
            );
-           console.log("Email sent successfully:", emailResponse.response);
+          // console.log("Email sent successfully:", emailResponse.response);
        }
        catch(error){
         console.error("Error occured while sending email:", error);
