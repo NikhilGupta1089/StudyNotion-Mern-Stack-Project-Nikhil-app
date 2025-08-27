@@ -26,7 +26,7 @@ exports.courseEnrollmentEmail = (courseName, name) => {
     
             .logo {
                 max-width: 200px;
-                margin-bottom: 20px;
+                
             }
     
             .message {
@@ -61,14 +61,24 @@ exports.courseEnrollmentEmail = (courseName, name) => {
             .highlight {
                 font-weight: bold;
             }
+            .link {
+              color: blue;                 
+              text-decoration: underline; 
+              font-size: 14px; 
+             display: block;
+             margin-top: 2px;        
+             margin-bottom: 20px;           
+           }    
         </style>
     
     </head>
     
     <body>
         <div class="container">
-            <a href="https://studynotion-edtech-project.vercel.app"><img class="logo" src="https://i.ibb.co/7Xyj3PC/logo.png"
-                    alt="StudyNotion Logo"></a>
+           <a href="https://studynotion-frontend-cfln.onrender.com/"><img class="logo"
+                  src="https://s3-alpha.figma.com/hub/file/5087588282/bb702b0d-77ea-4ef0-b9fb-7096edbaa06f-cover.png"
+                   alt="StudyNotion Logo"></a>
+             <a href="https://studynotion-frontend-cfln.onrender.com/" class="link">Go to StudyNotion Dashboard</a>   
             <div class="message">Course Registration Confirmation</div>
             <div class="body">
                 <p>Dear ${name},</p>
@@ -76,10 +86,10 @@ exports.courseEnrollmentEmail = (courseName, name) => {
                     are excited to have you as a participant!</p>
                 <p>Please log in to your learning dashboard to access the course materials and start your learning journey.
                 </p>
-                <a class="cta" href="https://studynotion-edtech-project.vercel.app/dashboard">Go to Dashboard</a>
+                <a class="cta" href="https://studynotion-frontend-cfln.onrender.com/">Go to Dashboard</a>
             </div>
             <div class="support">If you have any questions or need assistance, please feel free to reach out to us at <a
-                    href="mailto:info@studynotion.com">info@studynotion.com</a>. We are here to help!</div>
+                    href="mailto:nikkugahoi@gmail.com">nikkugahoi@gmail.com</a>. We are here to help!</div>
         </div>
     </body>
     

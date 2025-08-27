@@ -5,6 +5,8 @@ const mailSender = async (email, title, body) => {
           
           let transporter = nodemailer.createTransport ({
             host: process.env.MAIL_HOST,
+             port: 465,
+             secure: true, 
             auth: {
                 user: process.env.MAIL_USER,
                 pass: process.env.MAIL_PASS,
@@ -12,7 +14,7 @@ const mailSender = async (email, title, body) => {
           })
 
           let info = await transporter.sendMail({
-            from: 'StudyNotion || CodeHelp - by Babbar',
+            from: `"StudyNotion || Owner - by Nikhil Gupta" <${process.env.MAIL_USER}>`,
             to: `${email}`,
             subject: `${title}`,
             html: `${body}`,
@@ -21,7 +23,7 @@ const mailSender = async (email, title, body) => {
           return info;
     }
     catch(error){
-        console.log(error.message);
+       console.error("❌ Error sending mail:", error.message);
         return error.message
     }
 }

@@ -36,7 +36,7 @@ const ContactUsForm = () => {
             reset({
                 email:"",
                 firstName:"",
-                laseName:"",
+                lastName:"",
                 message:"",
                 phoneNo:"",
             })

@@ -8,6 +8,7 @@ import { MdContacts } from "react-icons/md";
 
 import useOnClickOutside from "../../../hooks/useOnClickOutside"
 import { logout } from "../../../services/operations/authAPI"
+import ConfirmationModal from "../../common/ConfirmationModal"
 
 const ProfileDropDown = () => {
 
@@ -16,13 +17,14 @@ const ProfileDropDown = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
+  const [confirmation, setConfirmation] = useState(null)
 
   useOnClickOutside(ref, () => setOpen(false))
 
   if(!user) return null;
 
   return (
-    
+    <>
         <button className="relative" onClick={() => setOpen(true)}>
             <div className="flex items-center gap-x-1">
                <img
@@ -47,10 +49,14 @@ const ProfileDropDown = () => {
                          </div>
                      </Link>
                      <div
-                      onClick={() => {
-                        dispatch(logout(navigate))
-                        setOpen(false)
-                      }}
+                      onClick={ () => setConfirmation({
+                                     text1: "Are You Sure ?",
+                                     text2: "You will be logged Out",
+                                     btn1Text: "Logout",
+                                     btn2Text: "Cancel",
+                                     btn1Handler: () => {dispatch(logout(navigate)); setOpen(false)},
+                                     btn2Handler: () => {setConfirmation(null); setOpen(false)},
+                                 })}
                       className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-100 hover:bg-richblack-700 hover:text-richblack-25">
                         <VscSignOut className="text-lg"/>
                         Logout
@@ -76,7 +82,8 @@ const ProfileDropDown = () => {
                )
             }
         </button>
-    
+        {confirmation && <ConfirmationModal modalData={confirmation}/> }
+    </>
   )
 }
 

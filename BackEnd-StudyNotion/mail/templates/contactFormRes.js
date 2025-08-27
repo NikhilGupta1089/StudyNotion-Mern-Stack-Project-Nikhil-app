@@ -1,7 +1,7 @@
 exports.contactUsEmail = (
   email,
-  firstname,
-  lastname,
+  firstName,
+  lastName,
   message,
   phoneNo,
   countrycode
@@ -33,7 +33,6 @@ exports.contactUsEmail = (
   
           .logo {
               max-width: 200px;
-              margin-bottom: 20px;
           }
   
           .message {
@@ -68,28 +67,38 @@ exports.contactUsEmail = (
           .highlight {
               font-weight: bold;
           }
+          .link {
+              color: blue;                 
+              text-decoration: underline; 
+              font-size: 14px; 
+             display: block;
+             margin-top: 2px;        
+             margin-bottom: 20px;           
+           }   
       </style>
   
   </head>
   
   <body>
       <div class="container">
-          <a href="https://studynotion-edtech-project.vercel.app"><img class="logo"
-                  src="https://i.ibb.co/7Xyj3PC/logo.png" alt="StudyNotion Logo"></a>
+          <a href="https://studynotion-frontend-cfln.onrender.com/"><img class="logo"
+                  src="https://s3-alpha.figma.com/hub/file/5087588282/bb702b0d-77ea-4ef0-b9fb-7096edbaa06f-cover.png"
+                   alt="StudyNotion Logo"></a>
+           <a href="https://studynotion-frontend-cfln.onrender.com/" class="link">Go to StudyNotion Dashboard</a>        
           <div class="message">Contact Form Confirmation</div>
           <div class="body">
-              <p>Dear ${firstname} ${lastname},</p>
+              <p>Dear ${firstName} ${lastName},</p>
               <p>Thank you for contacting us. We have received your message and will respond to you as soon as possible.
               </p>
               <p>Here are the details you provided:</p>
-              <p>Name: ${firstname} ${lastname}</p>
+              <p>Name: ${firstName} ${lastName}</p>
               <p>Email: ${email}</p>
-              <p>Phone Number: ${phoneNo}</p>
+              <p>Phone Number: ${countrycode} ${phoneNo}</p>
               <p>Message: ${message}</p>
               <p>We appreciate your interest and will get back to you shortly. </p>
           </div>
           <div class="support">If you have any further questions or need immediate assistance, please feel free to reach
-              out to us at <a href="mailto:info@studynotion.com">info@studynotion.com</a>. We are here to help!</div>
+              out to us at <a href="mailto:nikkugahoi@gmail.com">nikkugahoi@gmail.com</a>. We are here to help!</div>
       </div>
   </body>
   

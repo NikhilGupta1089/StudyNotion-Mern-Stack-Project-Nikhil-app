@@ -8,6 +8,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Profile = require("../models/Profile");
 require("dotenv").config();
+const emailTemplate = require("../mail/templates/emailVerificationTemplate")
 
 
 
@@ -247,6 +248,18 @@ exports.sendOTP = async (req , res) => {
       const otpBody = await OTP.create(otpPayload);
       console.log("otpBody: ", otpBody);
 
+        // Send OTP email
+      try {
+          const mailResponse = await mailSender(
+              email,
+              "Verification Email from StudyNotion",
+              emailTemplate(otp) // make sure your emailTemplate function returns HTML string
+          );
+          console.log("OTP Email sent successfully:", mailResponse.response);
+      } catch(error) {
+          console.error("Failed to send OTP email:", error);
+      }
+
       // return response successfully
       res.status(200).json({
         success: true,
@@ -308,6 +321,7 @@ exports.changePassword = async(req, res) => {
        try {
            const emailResponse = await mailSender(
                   updatedUserDetails.email,
+                  `Password Updated`,
                   passwordUpdated(
                     updatedUserDetails.email,
                     `Password updated Successfully for ${updatedUserDetails.firstName} ${updatedUserDetails.lastName}`
